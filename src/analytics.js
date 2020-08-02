@@ -14,45 +14,28 @@
  * limitations under the License.
  */
 
-import {
-  getElementService,
-  getElementServiceIfAvailable,
-} from './element-service';
-
-
-/**
- * @param {!Window} window
- * @return {!Promise<!../extensions/amp-analytics/0.1/instrumentation.InstrumentationService>}
- */
-export function analyticsFor(window) {
-  return (/** @type {!Promise<
-            !../extensions/amp-analytics/0.1/instrumentation.InstrumentationService
-          >} */ (getElementService(
-                window, 'amp-analytics-instrumentation', 'amp-analytics')));
-};
-
-/**
- * @param {!Window} window
- * @return {!Promise<?../extensions/amp-analytics/0.1/instrumentation.InstrumentationService>}
- */
-export function analyticsForOrNull(window) {
-  return (/** @type {!Promise<
-            ?../extensions/amp-analytics/0.1/instrumentation.InstrumentationService
-          >} */ (getElementServiceIfAvailable(
-                window, 'amp-analytics-instrumentation', 'amp-analytics')));
-};
+import {Services} from './services';
+import {dict} from './utils/object';
 
 /**
  * Helper method to trigger analytics event if amp-analytics is available.
- * @param {!Window} window
+ * TODO: Do not expose this function
+ * @param {!Element} target
  * @param {string} eventType
- * @param {!Object<string, string>=} opt_vars A map of vars and their values.
+ * @param {!JsonObject} vars A map of vars and their values.
+ * @param {boolean} enableDataVars A boolean to indicate if data-vars-*
+ * attribute value from target element should be included.
  */
-export function triggerAnalyticsEvent(window, eventType, opt_vars) {
-  analyticsForOrNull(window).then(analytics => {
+export function triggerAnalyticsEvent(
+  target,
+  eventType,
+  vars = dict(),
+  enableDataVars = true
+) {
+  Services.analyticsForDocOrNull(target).then((analytics) => {
     if (!analytics) {
       return;
     }
-    analytics.triggerEvent(eventType, opt_vars);
+    analytics.triggerEventForTarget(target, eventType, vars, enableDataVars);
   });
 }

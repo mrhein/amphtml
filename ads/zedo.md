@@ -21,21 +21,23 @@ limitations under the License.
 ### Basic
 
 ```html
-<amp-ad width=300 height=250
-    type="zedo"
-    data-super-id="364489"
-    data-network="2500"
-    data-placement-id="364489_1"
-    data-channel="727"
-    data-publisher="0"
-    data-dim="9"
+<amp-ad
+  width="300"
+  height="250"
+  type="zedo"
+  data-super-id="364489"
+  data-network="2500"
+  data-placement-id="364489_1"
+  data-channel="727"
+  data-publisher="0"
+  data-dim="9"
+>
 </amp-ad>
 ```
 
-
 ## Configuration
 
-For semantics of configuration, please see contact us [https://www.zedo.com/contact-us/]
+For semantics of configuration, please contact support@zedo.com.
 
 ### Required parameters
 
@@ -47,6 +49,7 @@ For semantics of configuration, please see contact us [https://www.zedo.com/cont
 - `data-dim`
 
 ### Optional parameters
+
 - `data-charset`
 - `data-callback`
 - `data-renderer`

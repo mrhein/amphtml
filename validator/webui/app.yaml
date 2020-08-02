@@ -1,10 +1,10 @@
-version: 1
-runtime: go
-api_version: go1
+runtime: go113
+
+main: ./main
 
 handlers:
 - url: /fetch
-  script: _go_app
+  script: auto
   secure: always
 
 - url: /$
@@ -21,6 +21,3 @@ handlers:
   static_files: logo-blue.svg
   upload: logo-blue\.svg$
   secure: always
-
-skip_files:
-  serve-standalone.go
